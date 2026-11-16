@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
 import Scene from './scene/Scene'
-import Joystick from './ui/Joystick'
 import { IS_TOUCH, view } from './input'
 
 export default function App() {
@@ -20,15 +19,13 @@ export default function App() {
       </Canvas>
 
       <header className="header">
-        <h1>Teckels</h1>
+        <h1>Bella &amp; Sasha, Album</h1>
         <p>
           {IS_TOUCH
-            ? 'Toca para pasear a Sasha · joystick · arrastra para girar · pellizca para zoom'
+            ? 'Toca el piso para pasear a Sasha · arrastra para girar · pellizca para zoom'
             : 'Clic para pasear a Sasha · WASD o flechas · arrastra para girar · rueda para zoom'}
         </p>
       </header>
-
-      {IS_TOUCH && <Joystick />}
 
       <button className="reset-view" onClick={() => view.reset()} aria-label="Volver a la vista inicial" title="Volver a la vista inicial">
         <svg viewBox="0 0 24 24" aria-hidden="true">

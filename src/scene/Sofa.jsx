@@ -27,13 +27,6 @@ const INNER = W - 2 * armW
 const BASE_TOP = plinthH + baseH
 const ARM_TOP = seatTop + armRise
 
-/** Puntos del asiento (coordenadas locales del sofá) para colocar perritas y mantas. */
-export const seatSpots = {
-  center: [0, seatTop, 0],
-  backLeft: [-INNER / 2 + 1.05, seatTop, -D / 2 + 1.15],
-  backRight: [INNER / 2 - 1.0, seatTop, -D / 2 + 0.95],
-}
-
 /**
  * Sofá clay sin respaldo (como el de la foto): cuerpo beige sobre zócalo de madera,
  * brazos cuadrados y una manta azul que cubre asiento y brazos y cae por los lados.
