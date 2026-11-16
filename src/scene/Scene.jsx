@@ -5,6 +5,7 @@ import { useThree } from '@react-three/fiber'
 import Floor from './Floor'
 import Walls from './Walls'
 import Tv from './Tv'
+import SpecialPhoto from './SpecialPhoto'
 import Sofa from './Sofa'
 import DogStairs from './DogStairs'
 import Bella from './Bella'
@@ -101,6 +102,7 @@ export default function Scene({ tvOn = false, onTvClick }) {
       <group position={[0, -0.6, 0]} onClick={onSceneClick}>
         <Floor />
         <Walls />
+        <SpecialPhoto />
         <Tv on={tvOn} onClick={onTvClick} />
         <SecurityCamera position={[SECURITY_CAM.x, SECURITY_CAM.y, -FLOOR_D / 2]} />
         <Sofa position={SOFA.position} />
