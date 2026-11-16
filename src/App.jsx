@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import * as THREE from 'three'
 import Scene from './scene/Scene'
 import { IS_TOUCH, view } from './input'
+import MusicPlayer from './ui/MusicPlayer'
 
 export default function App() {
   return (
@@ -26,6 +27,8 @@ export default function App() {
             : 'Clic para pasear a Sasha · WASD o flechas · arrastra para girar · rueda para zoom'}
         </p>
       </header>
+
+      <MusicPlayer />
 
       <button className="reset-view" onClick={() => view.reset()} aria-label="Volver a la vista inicial" title="Volver a la vista inicial">
         <svg viewBox="0 0 24 24" aria-hidden="true">
