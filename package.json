@@ -1,0 +1,24 @@
+{
+  "name": "teckels",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "optimize:models": "gltf-transform optimize bella.glb public/models/bella.glb --compress meshopt --texture-compress webp --texture-size 2048 --simplify-ratio 0.35 --simplify-error 0.0005 && gltf-transform optimize sasha.glb public/models/sasha.glb --compress meshopt --texture-compress webp --texture-size 1024 --simplify-ratio 0.2 --simplify-error 0.001"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/cli": "^4.2.1",
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.6"
+  }
+}

@@ -1,0 +1,59 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: 'Nunito', 'Trebuchet MS', system-ui, sans-serif;
+  color: #5a4636;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo pastel cálido, como luz de tarde dentro de casa */
+.app {
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 15%, rgba(255, 214, 186, 0.9), transparent 55%),
+    radial-gradient(ellipse at 90% 20%, rgba(214, 196, 240, 0.8), transparent 50%),
+    radial-gradient(ellipse at 80% 95%, rgba(255, 186, 150, 0.7), transparent 55%),
+    linear-gradient(135deg, #fde9d9 0%, #f6dccf 45%, #e9d3ec 100%);
+}
+.app canvas { touch-action: none; }
+
+.header {
+  position: fixed; top: 18px; left: 22px; pointer-events: none;
+}
+.header p { max-width: min(560px, calc(100vw - 44px)); }
+.header h1 { font-size: clamp(22px, 3.2vw, 32px); font-weight: 900; letter-spacing: -.3px; }
+.header p { font-size: 13px; opacity: .75; margin-top: 2px; font-weight: 700; }
+
+/* ---------- Botón para volver a la vista inicial ---------- */
+.reset-view {
+  position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom));
+  width: 48px; height: 48px; border-radius: 50%; border: none; cursor: pointer;
+  display: grid; place-items: center;
+  background: rgba(255, 250, 244, .85); color: #5a4636;
+  box-shadow: 0 6px 18px rgba(90, 60, 40, .22), inset 0 -3px 0 rgba(0,0,0,.08);
+  backdrop-filter: blur(6px);
+  transition: transform .15s;
+  touch-action: manipulation;
+}
+.reset-view:active { transform: scale(.92); }
+.reset-view svg { width: 22px; height: 22px; fill: currentColor; }
+
+/* ---------- Joystick táctil ---------- */
+.joystick {
+  position: fixed; left: 22px; bottom: calc(22px + env(safe-area-inset-bottom));
+  width: 128px; height: 128px; border-radius: 50%;
+  background: rgba(255, 250, 244, .45);
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.7), 0 6px 18px rgba(90, 60, 40, .18);
+  backdrop-filter: blur(6px);
+  display: grid; place-items: center;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  transition: background .2s;
+}
+.joystick.on { background: rgba(255, 250, 244, .65); }
+.joystick-knob {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #ffd9a8, #f0a35e);
+  box-shadow: 0 4px 12px rgba(160, 90, 30, .35), inset 0 -4px 0 rgba(0,0,0,.12);
+  pointer-events: none;
+}
+.joystick:not(.on) .joystick-knob { transition: transform .15s ease-out; }
