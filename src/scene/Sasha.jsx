@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { makeClay } from './clay'
 import { SASHA } from './layout'
 import { heightAt, planRoute, MAX_STEP, MAX_REACH, NOSE_SHRINK } from './nav'
+import { focusPoints } from '../input'
 
 const URL = `${import.meta.env.BASE_URL}models/sasha.glb`
 
@@ -31,7 +32,7 @@ const ground = (x, z, fallback) => {
  * por código: rebote, balanceo lateral, inclinación en la escalera y respiración en reposo.
  * `controller.current.goTo(x, z)` la manda caminar a un punto (usado por los clics).
  */
-export default function Sasha({ controller }) {
+export default function Sasha({ controller, onDoubleClick }) {
   const { scene } = useGLTF(URL)
   const camera = useThree((s) => s.camera)
   const root = useRef()
@@ -184,6 +185,8 @@ export default function Sasha({ controller }) {
     const t = state.clock.elapsedTime
 
     root.current.position.set(s.x, s.y, s.z)
+    // Para que la cámara pueda seguirla (la escena está bajada 0.6; se apunta a la altura del lomo)
+    focusPoints.sasha.set(s.x, s.y - 0.6 + 0.55 * SASHA.scale, s.z)
     root.current.rotation.y = s.yaw
     tilt.current.rotation.x = s.pitch + Math.sin(s.phase * 2) * 0.025 * s.walk
     tilt.current.rotation.z = Math.sin(s.phase) * 0.05 * s.walk
@@ -202,7 +205,7 @@ export default function Sasha({ controller }) {
 
   return (
     <>
-      <group ref={root}>
+      <group ref={root} onDoubleClick={onDoubleClick}>
         <group scale={SASHA.scale}>
           <group ref={tilt} position={[0, PIVOT, 0]}>
             <group ref={body} position={[0, -PIVOT, 0]}>
