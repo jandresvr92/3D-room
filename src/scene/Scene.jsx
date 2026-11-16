@@ -46,7 +46,7 @@ function Lights() {
 const CAM_POSITION = [14, 12, 16]
 const CAM_TARGET = [0, 2.2, 0]
 
-export default function Scene() {
+export default function Scene({ tvOn = false, onTvClick }) {
   const { size } = useThree()
   // Zoom responsivo para que la habitación quepa en cualquier pantalla.
   // En vertical (celular) se acerca más: las esquinas del piso pueden quedar un poco fuera,
@@ -101,7 +101,7 @@ export default function Scene() {
       <group position={[0, -0.6, 0]} onClick={onSceneClick}>
         <Floor />
         <Walls />
-        <Tv />
+        <Tv on={tvOn} onClick={onTvClick} />
         <SecurityCamera position={[SECURITY_CAM.x, SECURITY_CAM.y, -FLOOR_D / 2]} />
         <Sofa position={SOFA.position} />
         <DogStairs position={STAIRS.position} rotation={[0, STAIRS.rotationY, 0]} />

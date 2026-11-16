@@ -75,3 +75,90 @@ body {
 @media (max-width: 640px) {
   .player { top: auto; right: auto; left: 16px; bottom: calc(18px + env(safe-area-inset-bottom)); }
 }
+
+/* ---------- Galería "Salchipin" (se abre desde la tele) ---------- */
+.gallery-backdrop {
+  position: fixed; inset: 0; z-index: 30;
+  display: grid; place-items: center; padding: 24px;
+  background: rgba(60, 35, 25, .45); backdrop-filter: blur(6px);
+  animation: fade .3s ease;
+}
+.gallery {
+  width: min(1100px, 100%); max-height: calc(100vh - 48px); overflow: auto;
+  background: #fffaf4; border-radius: 26px;
+  box-shadow: 0 30px 80px rgba(60, 30, 15, .4);
+  padding: 0 22px 22px;
+  transform-origin: 30% 20%; /* como si saliera de la tele */
+  animation: tv-open .45s cubic-bezier(.2, .9, .3, 1.15);
+  overscroll-behavior: contain;
+}
+.gallery-head {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 20px 2px 14px;
+  background: linear-gradient(#fffaf4 75%, rgba(255, 250, 244, 0));
+}
+.gallery-title {
+  font-size: clamp(30px, 5vw, 44px); font-weight: 900; letter-spacing: -1px; line-height: 1;
+  background: linear-gradient(90deg, #f0a35e, #e9779a);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.gallery-sub { font-size: 13px; font-weight: 800; opacity: .6; margin-top: 4px; }
+.gallery-close {
+  flex: none; width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer;
+  background: #f3e6da; color: #5a4636; font-size: 16px; font-weight: 900;
+  touch-action: manipulation;
+}
+.gallery-close:hover { background: #ecd8c6; }
+.gallery-empty { padding: 30px 4px; font-weight: 700; opacity: .7; }
+
+/* Columnas de distintas alturas, estilo Pinterest */
+.masonry { column-count: 4; column-gap: 14px; }
+.pin {
+  display: block; width: 100%; margin: 0 0 14px; padding: 0; border: none; cursor: zoom-in;
+  break-inside: avoid; border-radius: 18px; overflow: hidden; background: #f3e6da;
+  box-shadow: 0 4px 14px rgba(90, 60, 40, .14);
+  opacity: 0; animation: pin-in .5s ease forwards;
+  transition: transform .2s, box-shadow .2s;
+}
+.pin:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(90, 60, 40, .22); }
+.pin img { display: block; width: 100%; height: auto; }
+
+/* Foto ampliada */
+.lightbox {
+  position: fixed; inset: 0; z-index: 40;
+  display: grid; place-items: center; padding: 20px;
+  background: rgba(30, 18, 12, .88);
+  animation: fade .2s ease;
+}
+.lightbox img {
+  max-width: min(92vw, 1000px); max-height: 86vh; border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+  animation: pop-in .25s ease;
+}
+.lightbox-nav {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255, 250, 244, .9); color: #5a4636; font-size: 32px; line-height: 1; font-weight: 700;
+  touch-action: manipulation;
+}
+.lightbox-nav.prev { left: 16px; }
+.lightbox-nav.next { right: 16px; }
+.lightbox-count {
+  position: fixed; bottom: calc(18px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+  color: #fff; font-weight: 800; font-size: 14px; opacity: .85;
+}
+
+@keyframes fade { from { opacity: 0 } }
+@keyframes tv-open { from { opacity: 0; transform: scale(.6) } to { opacity: 1; transform: none } }
+@keyframes pin-in { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+@keyframes pop-in { from { opacity: 0; transform: scale(.94) } }
+
+@media (max-width: 900px) { .masonry { column-count: 3; } }
+@media (max-width: 640px) {
+  .gallery-backdrop { padding: 0; }
+  .gallery { max-height: 100vh; height: 100%; border-radius: 0; padding: 0 12px 16px; }
+  .masonry { column-count: 2; column-gap: 10px; }
+  .pin { margin-bottom: 10px; border-radius: 14px; }
+  .lightbox-nav { width: 44px; height: 44px; font-size: 28px; }
+}
