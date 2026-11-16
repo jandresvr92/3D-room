@@ -37,23 +37,3 @@ body {
 }
 .reset-view:active { transform: scale(.92); }
 .reset-view svg { width: 22px; height: 22px; fill: currentColor; }
-
-/* ---------- Joystick táctil ---------- */
-.joystick {
-  position: fixed; left: 22px; bottom: calc(22px + env(safe-area-inset-bottom));
-  width: 128px; height: 128px; border-radius: 50%;
-  background: rgba(255, 250, 244, .45);
-  box-shadow: inset 0 0 0 2px rgba(255,255,255,.7), 0 6px 18px rgba(90, 60, 40, .18);
-  backdrop-filter: blur(6px);
-  display: grid; place-items: center;
-  touch-action: none; user-select: none; -webkit-user-select: none;
-  transition: background .2s;
-}
-.joystick.on { background: rgba(255, 250, 244, .65); }
-.joystick-knob {
-  width: 56px; height: 56px; border-radius: 50%;
-  background: linear-gradient(135deg, #ffd9a8, #f0a35e);
-  box-shadow: 0 4px 12px rgba(160, 90, 30, .35), inset 0 -4px 0 rgba(0,0,0,.12);
-  pointer-events: none;
-}
-.joystick:not(.on) .joystick-knob { transition: transform .15s ease-out; }

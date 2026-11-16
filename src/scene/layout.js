@@ -49,6 +49,14 @@ export const SOFA = {
 SOFA.position = [-FLOOR_W / 2 + SOFA.width / 2 + 0.3, 0, -FLOOR_D / 2 + TILE + SOFA.depth / 2]
 SOFA.seatTop = SOFA.plinthH + SOFA.baseH + SOFA.cushionH // ≈ 1.32
 
+/** Puntos del asiento (coordenadas locales del sofá) para colocar perritas y mantas. */
+const SEAT_INNER = SOFA.width - 2 * SOFA.armW
+export const seatSpots = {
+  center: [0, SOFA.seatTop, 0],
+  backLeft: [-SEAT_INNER / 2 + 1.05, SOFA.seatTop, -SOFA.depth / 2 + 1.15],
+  backRight: [SEAT_INNER / 2 - 1.0, SOFA.seatTop, -SOFA.depth / 2 + 0.95],
+}
+
 /** Escalera de 4 escalones acolchados, frente al asiento y algo a la derecha. */
 export const STAIRS = {
   steps: 4,

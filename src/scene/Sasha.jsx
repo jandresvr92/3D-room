@@ -5,7 +5,6 @@ import * as THREE from 'three'
 import { makeClay } from './clay'
 import { SASHA } from './layout'
 import { heightAt, planRoute, MAX_STEP, MAX_REACH, NOSE_SHRINK } from './nav'
-import { joystick } from '../input'
 
 const URL = `${import.meta.env.BASE_URL}models/sasha.glb`
 
@@ -110,17 +109,14 @@ export default function Sasha({ controller }) {
     let dx = 0
     let dz = 0
     let remaining = Infinity
-    let throttle = 1 // 0..1: el joystick permite caminar despacio
-    const stick = joystick.active && Math.hypot(joystick.x, joystick.y) > 0.15
-    const manual = k.size > 0 || stick
+    const manual = k.size > 0
     if (manual) {
       s.route = [] // el control directo cancela la ruta del clic/toque
       const f = camera.getWorldDirection(camDir.current)
       f.y = 0
       f.normalize()
-      const fwd = stick ? joystick.y : (k.has('up') ? 1 : 0) - (k.has('down') ? 1 : 0)
-      const side = stick ? joystick.x : (k.has('right') ? 1 : 0) - (k.has('left') ? 1 : 0)
-      if (stick) throttle = Math.min(1, Math.hypot(joystick.x, joystick.y))
+      const fwd = (k.has('up') ? 1 : 0) - (k.has('down') ? 1 : 0)
+      const side = (k.has('right') ? 1 : 0) - (k.has('left') ? 1 : 0)
       dx = f.x * fwd - f.z * side
       dz = f.z * fwd + f.x * side
     } else if (s.route.length) {
@@ -142,7 +138,7 @@ export default function Sasha({ controller }) {
       dz /= len
       const diff = wrapAngle(Math.atan2(dx, dz) - s.yaw)
       s.yaw = wrapAngle(s.yaw + diff * Math.min(1, dt * TURN))
-      const step = Math.min(SPEED * throttle * dt * Math.max(0.25, Math.cos(diff)), remaining)
+      const step = Math.min(SPEED * dt * Math.max(0.25, Math.cos(diff)), remaining)
       const here = heightAt(s.x, s.z)
 
       const tryMove = (mx, mz) => {

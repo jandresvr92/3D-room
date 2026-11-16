@@ -2,8 +2,7 @@
  * Navegación de Sasha: mapa de alturas de la habitación, obstáculos y rutas.
  * Todo en coordenadas del grupo de la escena (X/Z horizontales, Y = 0 en la cara del piso).
  */
-import { FLOOR_W, FLOOR_D, SOFA, SOFA_FRONT, STAIRS, BELLA, CATERPILLAR } from './layout'
-import { seatSpots } from './Sofa'
+import { FLOOR_W, FLOOR_D, SOFA, SOFA_FRONT, STAIRS, BELLA, CATERPILLAR, seatSpots } from './layout'
 
 export const BLOCKED = Infinity
 /** Desnivel máximo que el centro del cuerpo puede subir o bajar de un paso (un escalón ≈ 0.33). */
